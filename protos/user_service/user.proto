@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+option go_package = ".";
+
+message User {
+  string id = 1;
+  string name = 2;
+  int64 age = 3;
+  string username = 4;
+  string email = 5;
+  string password = 6;
+  string refresh_token = 7;
+}
+
+message Username {
+  string username = 1;
+}
+
+message Email {
+  string email = 1;
+}
+
+message GetAllUserRequest {
+  int64 page = 1;
+  int64 limit = 2;
+}
+
+message GetAllUserResponse {
+  int64 count = 1;
+  repeated User users = 2;
+}
+
+message UserId {
+  string user_id = 1;
+}
+
+message Empty {
+}
+
+message CheckFieldRequest {
+  string field = 1;
+  string data = 2;
+}
+
+message CheckFieldResponse {
+  bool status = 1;
+}
+
+message GetUserByEmailResponse {
+  string id = 1;
+  string name = 2;
+  int64 age = 3;
+  string username = 4;
+  string email = 5;
+  string password = 6;
+  string refresh_token = 7;
+}
+
+
+service UserService {
+  rpc CreateUser(User) returns (User);
+  rpc GetUserByUsername(Username) returns (User);
+  rpc GetUserByEmail(Email) returns (User);
+  rpc UpdateUserById(User) returns (User);
+  rpc GetUserById(UserId) returns (User);
+  rpc ListUser(GetAllUserRequest) returns (GetAllUserResponse);
+  rpc DeleteUser(UserId) returns (Empty);
+  rpc CheckField(CheckFieldRequest) returns (CheckFieldResponse);
+}

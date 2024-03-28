@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option go_package = ".";
+
+message Message {
+  string sender_id = 1;
+  string receiver_id = 2;
+  string content = 3;
+}
+
+message MessageRequest {
+  string freelancer_id = 1;
+  string employee_id = 2;
+  string response_writer = 3;
+  string request = 4;
+}
+
+message MessageResponse {
+  string message_id = 1;
+  bool success = 2;
+}
+
+service MessageService {
+  rpc Message(MessageRequest) returns (google.protobuf.Empty);
+}
